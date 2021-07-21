@@ -1,14 +1,15 @@
 'use strict';
 
 const assert = require('assert');
+const { maxHeaderSize } = require('http');
 const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
-
+let solution = 'abcd'; // Comment this out to generate a random solution
 let board = [];
-let solution = '';
+//let solution = '';
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
 const printBoard = () =>  {
@@ -28,14 +29,72 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const generateHint = () =>  {
+
+
+
+
+
+  
+
+   
+  
+
+
+const generateHint = (guess) =>  {
   // your code here
+let solutionArray = solution.split('') ;
+let guessArray = guess.split('');
+let correctLetterLocation = 0;
+for(let i = 0; i < solutionArray.length; i++){
+  if(guessArray[i] === solutionArray[i]){
+correctLetterLocation++
+solutionArray[i] = null
+  
+
+
+} 
+  }
+
+
+let correctLetters = 0;
+for(let i = 0; i < solutionArray.length; i++){
+  guessArray.indexOf(solutionArray[i]);
+  let targetIndex = solutionArray[i];
+  if(targetIndex > -1){
+    correctLetters++
+    solutionArray[i] = null
+  } 
+}
+return  correctLetterLocation + '-' + correctLetters ;
 }
 
+
 const mastermind = (guess) => {
-  solution = 'abcd'; // Comment this out to generate a random solution
+ 
   // your code here
+  if(guess == solution){
+    return 'You guessed it!';
+  }else {
+  let hint =  generateHint(guess)
+board.push(guess + hint);     
+  }
+if(board.length === 10){
+  return 'You ran out of turns! ,The Solution was' + solution 
+    
+  }else return 'Guess again';
 }
+  
+
+    
+
+
+  
+
+
+
+
+
+
 
 
 const getPrompt = () =>  {
